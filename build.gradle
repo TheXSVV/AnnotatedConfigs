@@ -1,0 +1,15 @@
+plugins {
+    id 'java'
+}
+
+group = 'code.thexsvv.annotatedconfigs'
+version = '0.1.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'commons-io:commons-io:2.13.0'
+    implementation 'org.json:json:20230618'
+}
