@@ -9,8 +9,8 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public interface ConfigParser {
+
     void parse(String content, Object classInstance);
-    ConfigLang getLanguage();
 
     default Map<String, Field> getKeys(Class<?> clazz) {
         Map<String, Field> map = new LinkedHashMap<>();

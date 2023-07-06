@@ -10,10 +10,9 @@ public class ConfigParsersFactory {
 
     private static ConfigParsersFactory instance;
 
-    private static Map<ConfigLang, ConfigParser> parsers;
+    private static final Map<ConfigLang, ConfigParser> parsers = new LinkedHashMap<>();
 
     public ConfigParsersFactory() {
-        parsers = new LinkedHashMap<>();
         parsers.put(ConfigLang.JSON, new JsonConfigParser());
     }
 

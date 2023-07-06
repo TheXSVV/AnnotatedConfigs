@@ -1,6 +1,5 @@
 package code.thexsvv.annotatedconfigs.parser.impl;
 
-import code.thexsvv.annotatedconfigs.ConfigLang;
 import code.thexsvv.annotatedconfigs.Configuratable;
 import code.thexsvv.annotatedconfigs.parser.ConfigParser;
 import org.json.JSONArray;
@@ -58,7 +57,10 @@ public class JsonConfigParser implements ConfigParser {
                     }
 
                     field.set(classInstance, list);
-                    //field.set(classInstance, Arrays.asList(parse("", classInstance)));
+                } else if (field.getType() == Configuratable.class) {
+                    Object instance = field.getType().getConstructor().newInstance();
+                    parse(jsonObject.optJSONObject(key).toString(), instance);
+                    field.set(classInstance, instance);
                 } else
                     field.set(classInstance, jsonObject.opt(key));
                 field.setAccessible(accessible);
@@ -66,10 +68,5 @@ public class JsonConfigParser implements ConfigParser {
                 exception.printStackTrace();
             }
         });
-    }
-
-    @Override
-    public ConfigLang getLanguage() {
-        return ConfigLang.JSON;
     }
 }
