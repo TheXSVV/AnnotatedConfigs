@@ -19,7 +19,7 @@ dependencies {
 }
 ```
 
-To add a dependency using `Gradle Kotlin`:
+To add a dependency using `Gradle Kotlin DSL`:
 ```kotlin
 repositories {
     maven("https://jitpack.io")
@@ -118,9 +118,9 @@ public class Main {
         config.load(Main.class.getResourceAsStream("/test.json")); // Loading config from InputStream
         
         System.out.println(config.name);
-        System.out.println(amount);
-        System.out.println(boss.name);
-        System.out.println(bosses.size());
+        System.out.println(config.amount);
+        System.out.println(config.boss.name);
+        System.out.println(config.bosses.size());
     }
 }
 ```
