@@ -1,5 +1,5 @@
 # AnnotatedConfigs
-[![Release](https://img.shields.io/badge/release-0.1.1-blue?style=for-the-badge)](https://github.com/TheXSVV/AnnotatedConfigs/releases/tag/v0.1.1) [![Language](https://img.shields.io/badge/Language-Java-orange?style=for-the-badge)](https://java.com)
+[![Release](https://img.shields.io/badge/release-0.1.1-blue?style=for-the-badge)](https://github.com/TheXSVV/AnnotatedConfigs/releases/tag/v0.1.1) [![Language](https://img.shields.io/badge/Language-Java-orange?style=for-the-badge)](https://java.com) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ae1e0ad502f4451a8c09c0edb057f255)](https://app.codacy.com/gh/TheXSVV/AnnotatedConfigs/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 Configs based on annotations for Java
 
