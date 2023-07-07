@@ -1,5 +1,6 @@
 # AnnotatedConfigs
 [![Release](https://img.shields.io/badge/release-0.1.1-blue?style=for-the-badge)](https://github.com/TheXSVV/AnnotatedConfigs/releases/tag/v0.1.1) [![Language](https://img.shields.io/badge/Language-Java-orange?style=for-the-badge)](https://java.com)
+
 Configs based on annotations for Java
 
 ## Supported languages:
