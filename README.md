@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.TheXSVV:AnnotatedConfigs:0.1.1'
+    implementation 'com.github.TheXSVV:AnnotatedConfigs:0.1.2'
 }
 ```
 
@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.TheXSVV:AnnotatedConfigs:0.1.1")
+    implementation("com.github.TheXSVV:AnnotatedConfigs:0.1.2")
 }
 ```
 
@@ -43,7 +43,7 @@ To add a dependency using `Maven`:
   <dependency>
     <groupId>com.github.TheXSVV</groupId>
     <artifactId>AnnotatedConfigs/artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
   </dependency>
 </dependencies>
 ```
