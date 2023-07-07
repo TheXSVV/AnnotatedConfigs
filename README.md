@@ -5,7 +5,7 @@ Configs based on annotations for Java
 
 ## Supported languages:
 * JSON
-* Yaml (supported later)
+* Yaml
 
 ## Installation:
 To add a dependency using `Gradle Groovy`, use the following:
