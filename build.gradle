@@ -12,4 +12,5 @@ repositories {
 dependencies {
     implementation 'commons-io:commons-io:2.13.0'
     implementation 'org.json:json:20230618'
+    implementation 'org.yaml:snakeyaml:2.0'
 }

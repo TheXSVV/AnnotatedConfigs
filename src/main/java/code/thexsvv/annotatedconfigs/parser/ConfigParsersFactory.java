@@ -2,6 +2,7 @@ package code.thexsvv.annotatedconfigs.parser;
 
 import code.thexsvv.annotatedconfigs.ConfigLang;
 import code.thexsvv.annotatedconfigs.parser.impl.JsonConfigParser;
+import code.thexsvv.annotatedconfigs.parser.impl.YamlConfigParser;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ public class ConfigParsersFactory {
 
     public ConfigParsersFactory() {
         parsers.put(ConfigLang.JSON, new JsonConfigParser());
+        parsers.put(ConfigLang.YAML, new YamlConfigParser());
     }
 
     public ConfigParser getParser(ConfigLang language) {
