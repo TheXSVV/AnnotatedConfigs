@@ -48,7 +48,7 @@ To add a dependency using `Maven`:
 </dependencies>
 ```
 
-If you use the built-in build system in your IDE just download .jar file from releases and add it to your project
+If you use the built-in build system in your IDE just download [.jar file from releases](https://github.com/TheXSVV/AnnotatedConfigs/releases) and add it to your project
 
 ## Example usage
 
