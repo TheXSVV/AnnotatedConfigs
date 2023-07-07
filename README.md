@@ -115,7 +115,7 @@ public class Main {
     public static void main(String[] args) {
         Config config = new Config(); // Creating a config object
         config.load(new File("test.json")); // Loading config from file
-        config.load(Main.class.getResourceAsStream("/test.json"));
+        config.load(Main.class.getResourceAsStream("/test.json")); // Loading config from InputStream
         
         System.out.println(config.name);
         System.out.println(amount);
