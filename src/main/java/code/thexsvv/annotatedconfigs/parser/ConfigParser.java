@@ -10,6 +10,7 @@ import java.util.Map;
 public interface ConfigParser {
 
     void parse(String content, Object classInstance);
+
     String write(Object classInstance);
 
     default Map<String, Field> getKeys(Class<?> clazz) {
