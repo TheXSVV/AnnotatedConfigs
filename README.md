@@ -1,11 +1,11 @@
 # AnnotatedConfigs
-[![Release](https://img.shields.io/badge/release-0.1.1-blue?style=for-the-badge)](https://github.com/TheXSVV/AnnotatedConfigs/releases/tag/v0.1.1) [![Language](https://img.shields.io/badge/Language-Java-orange?style=for-the-badge)](https://java.com) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/ae1e0ad502f4451a8c09c0edb057f255)](https://app.codacy.com/gh/TheXSVV/AnnotatedConfigs/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Latest Release](https://img.shields.io/badge/release-0.1.2-blue?style=for-the-badge)](https://github.com/TheXSVV/AnnotatedConfigs/releases) [![Language](https://img.shields.io/badge/Language-Java-orange?style=for-the-badge)](https://java.com) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/076f23bbe6924bbd8d2972b75cf91b24)](https://app.codacy.com/gh/TheXSVV/AnnotatedConfigs/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 Configs based on annotations for Java
 
 ## Supported languages:
 * JSON
-* Yaml (supported later)
+* Yaml
 
 ## Installation:
 To add a dependency using `Gradle Groovy`, use the following:
@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.TheXSVV:AnnotatedConfigs:0.1.1'
+    implementation 'com.github.TheXSVV:AnnotatedConfigs:0.1.2'
 }
 ```
 
@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.TheXSVV:AnnotatedConfigs:0.1.1")
+    implementation("com.github.TheXSVV:AnnotatedConfigs:0.1.2")
 }
 ```
 
@@ -43,7 +43,7 @@ To add a dependency using `Maven`:
   <dependency>
     <groupId>com.github.TheXSVV</groupId>
     <artifactId>AnnotatedConfigs/artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2</version>
   </dependency>
 </dependencies>
 ```
