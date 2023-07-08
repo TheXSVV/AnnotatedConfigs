@@ -7,9 +7,11 @@ import org.json.JSONObject;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class JsonConfigParser implements ConfigParser {
 
@@ -68,5 +70,48 @@ public class JsonConfigParser implements ConfigParser {
                 exception.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public String write(Object classInstance) {
+        Map<Object, Object> map = new LinkedHashMap<>();
+        getKeys(classInstance.getClass()).forEach((key, field) -> {
+            try {
+                boolean accessible = field.isAccessible();
+                field.setAccessible(true);
+                if (field.getType() == int.class)
+                    map.put(key, field.getInt(classInstance));
+                else if (field.getType() == double.class)
+                    map.put(key, field.getDouble(classInstance));
+                else if (field.getType() == float.class)
+                    map.put(key, field.getFloat(classInstance));
+                else if (field.getType() == long.class)
+                    map.put(key, field.getLong(classInstance));
+                else if (field.getType() == boolean.class)
+                    map.put(key, field.getBoolean(classInstance));
+                else if (field.getType() == short.class)
+                    map.put(key, field.getShort(classInstance));
+                else if (field.getType() == List.class) {
+                    ParameterizedType type = (ParameterizedType) field.getGenericType();
+                    Class<?> parameterizedClass = (Class<?>) type.getActualTypeArguments()[0];
+                    if (Configuratable.class.isAssignableFrom(parameterizedClass)) {
+                        map.put(key, ((List<?>) field.get(classInstance)).stream()
+                                .map(this::write)
+                                .map(JSONObject::new)
+                                .collect(Collectors.toList())
+                        );
+                    } else
+                        map.put(key, (List<?>) field.get(classInstance));
+                } else if (Configuratable.class.isAssignableFrom(field.getType())) {
+                    map.put(key, write(field.get(classInstance)));
+                } else
+                    map.put(key, field.get(classInstance));
+                field.setAccessible(accessible);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+
+        return new JSONObject(map).toString(4);
     }
 }

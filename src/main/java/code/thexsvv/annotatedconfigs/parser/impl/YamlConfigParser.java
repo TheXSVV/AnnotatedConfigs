@@ -2,21 +2,26 @@ package code.thexsvv.annotatedconfigs.parser.impl;
 
 import code.thexsvv.annotatedconfigs.Configuratable;
 import code.thexsvv.annotatedconfigs.parser.ConfigParser;
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class YamlConfigParser implements ConfigParser {
 
-    private static final Yaml yaml = new Yaml(new LoaderOptions());
+    private LoaderOptions parseOptions = new LoaderOptions();
+    private DumperOptions writeOptions = new DumperOptions();
 
     @Override
     public void parse(String content, Object classInstance) {
+        Yaml yaml = new Yaml(parseOptions);
         Map<?, Object> map = yaml.load(content);
         getKeys(classInstance.getClass()).forEach((key, field) -> {
             try {
@@ -70,5 +75,58 @@ public class YamlConfigParser implements ConfigParser {
                 exception.printStackTrace();
             }
         });
+    }
+
+    @Override
+    public String write(Object classInstance) {
+        Yaml yaml = new Yaml(writeOptions);
+
+        Map<Object, Object> map = new LinkedHashMap<>();
+        getKeys(classInstance.getClass()).forEach((key, field) -> {
+            try {
+                boolean accessible = field.isAccessible();
+                field.setAccessible(true);
+                if (field.getType() == int.class)
+                    map.put(key, field.getInt(classInstance));
+                else if (field.getType() == double.class)
+                    map.put(key, field.getDouble(classInstance));
+                else if (field.getType() == float.class)
+                    map.put(key, field.getFloat(classInstance));
+                else if (field.getType() == long.class)
+                    map.put(key, field.getLong(classInstance));
+                else if (field.getType() == boolean.class)
+                    map.put(key, field.getBoolean(classInstance));
+                else if (field.getType() == short.class)
+                    map.put(key, field.getShort(classInstance));
+                else if (field.getType() == List.class) {
+                    ParameterizedType type = (ParameterizedType) field.getGenericType();
+                    Class<?> parameterizedClass = (Class<?>) type.getActualTypeArguments()[0];
+                    if (Configuratable.class.isAssignableFrom(parameterizedClass)) {
+                        map.put(key, ((List<?>) field.get(classInstance)).stream()
+                                .map(this::write)
+                                .map(yaml::load)
+                                .collect(Collectors.toList())
+                        );
+                    } else
+                        map.put(key, (List<?>) field.get(classInstance));
+                } else if (Configuratable.class.isAssignableFrom(field.getType())) {
+                    map.put(key, yaml.load(write(field.get(classInstance))));
+                } else
+                    map.put(key, field.get(classInstance));
+                field.setAccessible(accessible);
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        });
+
+        return yaml.dump(map);
+    }
+
+    public void setParseOptions(LoaderOptions parseOptions) {
+        this.parseOptions = parseOptions;
+    }
+
+    public void setWriteOptions(DumperOptions writeOptions) {
+        this.writeOptions = writeOptions;
     }
 }

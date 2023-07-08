@@ -1,6 +1,5 @@
 package code.thexsvv.annotatedconfigs.parser;
 
-import code.thexsvv.annotatedconfigs.ConfigLang;
 import code.thexsvv.annotatedconfigs.annotations.ACKey;
 
 import java.lang.reflect.Field;
@@ -11,6 +10,7 @@ import java.util.Map;
 public interface ConfigParser {
 
     void parse(String content, Object classInstance);
+    String write(Object classInstance);
 
     default Map<String, Field> getKeys(Class<?> clazz) {
         Map<String, Field> map = new LinkedHashMap<>();

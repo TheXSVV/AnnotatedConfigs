@@ -20,6 +20,19 @@ public abstract class Configuratable {
         load(IOUtils.toString(inputStream, StandardCharsets.UTF_8));
     }
 
+    public void save(File file) throws IOException, IllegalStateException {
+        FileUtils.write(file, save(), StandardCharsets.UTF_8);
+    }
+
+    private String save() throws IllegalStateException {
+        if (getClass().isAnnotationPresent(ACLanguage.class)) {
+            ACLanguage language = getClass().getAnnotation(ACLanguage.class);
+            return ConfigParsersFactory.getInstance().getParser(language.language()).write(this);
+        }
+
+        throw new IllegalStateException("Class must have ACLanguage annotation");
+    }
+
     public void load(String content) {
         if (getClass().isAnnotationPresent(ACLanguage.class)) {
             ACLanguage language = getClass().getAnnotation(ACLanguage.class);
