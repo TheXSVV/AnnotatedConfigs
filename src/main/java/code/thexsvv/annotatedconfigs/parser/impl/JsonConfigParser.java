@@ -102,9 +102,9 @@ public class JsonConfigParser implements ConfigParser {
                         );
                     } else
                         map.put(key, (List<?>) field.get(classInstance));
-                } else if (Configuratable.class.isAssignableFrom(field.getType())) {
-                    map.put(key, write(field.get(classInstance)));
-                } else
+                } else if (classInstance instanceof Configuratable)
+                    map.put(key, new JSONObject(write(field.get(classInstance))));
+                else
                     map.put(key, field.get(classInstance));
                 field.setAccessible(accessible);
             } catch (Exception exception) {
