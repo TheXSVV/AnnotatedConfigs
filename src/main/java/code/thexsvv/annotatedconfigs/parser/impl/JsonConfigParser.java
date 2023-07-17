@@ -38,8 +38,15 @@ public class JsonConfigParser implements ConfigParser {
                     ParameterizedType type = (ParameterizedType) field.getGenericType();
                     Class<?> parameterizedClass = (Class<?>) type.getActualTypeArguments()[0];
                     List<Object> list = new LinkedList<>();
-                    JSONArray array = jsonObject.optJSONArray(key);
-                    if (array != null) {
+                    Object mapObj = jsonObject.opt(key);
+                    if (mapObj instanceof Map) {
+                        Map<String, Object> objectMap = (Map<String, Object>) mapObj;
+
+                        mapObj = new LinkedList<>(objectMap.values());
+                    }
+
+                    if (mapObj instanceof List) {
+                        JSONArray array = jsonObject.getJSONArray(key);
                         if (Configuratable.class.isAssignableFrom(parameterizedClass)) {
                             Constructor<?> constructor = parameterizedClass.getConstructor();
                             array.toList().stream()

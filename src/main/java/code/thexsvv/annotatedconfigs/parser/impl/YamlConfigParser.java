@@ -46,9 +46,16 @@ public class YamlConfigParser implements ConfigParser {
                         ParameterizedType type = (ParameterizedType) field.getGenericType();
                         Class<?> parameterizedClass = (Class<?>) type.getActualTypeArguments()[0];
                         List<Object> list = new LinkedList<>();
-                        List<Object> array = (List<Object>) map.get(key);
-                        if (array != null) {
-                            if (parameterizedClass.newInstance() instanceof Configuratable) {
+                        Object mapObj = map.get(key);
+                        if (mapObj instanceof Map) {
+                            Map<String, Object> objectMap = (Map<String, Object>) mapObj;
+
+                            mapObj = new LinkedList<>(objectMap.values());
+                        }
+
+                        if (mapObj instanceof List) {
+                            List<Object> array = (List<Object>) mapObj;
+                            if (Configuratable.class.isAssignableFrom(parameterizedClass)) {
                                 Constructor<?> constructor = parameterizedClass.getConstructor();
                                 array.stream()
                                         .filter(obj -> obj instanceof Map)
