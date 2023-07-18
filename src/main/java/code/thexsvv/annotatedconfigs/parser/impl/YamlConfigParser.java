@@ -74,7 +74,7 @@ public class YamlConfigParser implements ConfigParser {
                         }
 
                         field.set(classInstance, list);
-                    } else if (classInstance instanceof Configuratable) {
+                    } else if (Configuratable.class.isAssignableFrom(field.getType())) {
                         Object instance = field.getType().getConstructor().newInstance();
                         parse(yaml.dump(map.get(key)), instance);
                         field.set(classInstance, instance);
