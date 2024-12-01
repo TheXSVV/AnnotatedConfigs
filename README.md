@@ -1,5 +1,5 @@
 # AnnotatedConfigs
-[![Latest Release](https://img.shields.io/badge/release-0.1.3-blue?style=for-the-badge)](https://github.com/TheXSVV/AnnotatedConfigs/releases) [![Language](https://img.shields.io/badge/Language-Java-orange?style=for-the-badge)](https://java.com) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/076f23bbe6924bbd8d2972b75cf91b24)](https://app.codacy.com/gh/TheXSVV/AnnotatedConfigs/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Latest Release](https://img.shields.io/badge/release-0.1.4-blue?style=for-the-badge)](https://github.com/TheXSVV/AnnotatedConfigs/releases) [![Language](https://img.shields.io/badge/Language-Java-orange?style=for-the-badge)](https://java.com) [![Codacy Badge](https://app.codacy.com/project/badge/Grade/076f23bbe6924bbd8d2972b75cf91b24)](https://app.codacy.com/gh/TheXSVV/AnnotatedConfigs/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 
 Configs based on annotations for Java
 
@@ -15,7 +15,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.TheXSVV:AnnotatedConfigs:0.1.3'
+    implementation 'com.github.TheXSVV:AnnotatedConfigs:0.1.4'
 }
 ```
 
@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.TheXSVV:AnnotatedConfigs:0.1.3")
+    implementation("com.github.TheXSVV:AnnotatedConfigs:0.1.4")
 }
 ```
 
@@ -43,7 +43,7 @@ To add a dependency using `Maven`:
   <dependency>
     <groupId>com.github.TheXSVV</groupId>
     <artifactId>AnnotatedConfigs/artifactId>
-    <version>0.1.3</version>
+    <version>0.1.4</version>
   </dependency>
 </dependencies>
 ```
