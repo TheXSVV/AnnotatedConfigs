@@ -7,13 +7,12 @@ import code.thexsvv.annotatedconfigs.parser.impl.YamlConfigParser;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class ConfigParsersFactory {
+public enum ConfigParsersFactory {
+    INSTANCE;
 
-    private static ConfigParsersFactory instance;
+    private final Map<ConfigLang, ConfigParser> parsers = new LinkedHashMap<>();
 
-    private static final Map<ConfigLang, ConfigParser> parsers = new LinkedHashMap<>();
-
-    public ConfigParsersFactory() {
+    ConfigParsersFactory() {
         parsers.put(ConfigLang.JSON, new JsonConfigParser());
         parsers.put(ConfigLang.YAML, new YamlConfigParser());
     }
@@ -22,7 +21,7 @@ public class ConfigParsersFactory {
         return parsers.get(language);
     }
 
-    public static ConfigParsersFactory getInstance() {
-        return instance == null ? instance = new ConfigParsersFactory() : instance;
+    public void addParser(ConfigLang language, ConfigParser parser) {
+        parsers.put(language, parser);
     }
 }

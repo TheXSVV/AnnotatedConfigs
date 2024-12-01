@@ -12,6 +12,10 @@ import java.nio.charset.StandardCharsets;
 
 public abstract class Configuratable {
 
+    public void loadImportant(File file, ConfigLang lang) throws IOException {
+        loadImportant(FileUtils.readFileToString(file, StandardCharsets.UTF_8), lang);
+    }
+
     public void load(File file) throws IOException {
         load(FileUtils.readFileToString(file, StandardCharsets.UTF_8));
     }
@@ -24,10 +28,10 @@ public abstract class Configuratable {
         FileUtils.write(file, save(), StandardCharsets.UTF_8);
     }
 
-    private String save() throws IllegalStateException {
+    public String save() throws IllegalStateException {
         if (getClass().isAnnotationPresent(ACLanguage.class)) {
             ACLanguage language = getClass().getAnnotation(ACLanguage.class);
-            return ConfigParsersFactory.getInstance().getParser(language.language()).write(this);
+            return ConfigParsersFactory.INSTANCE.getParser(language.language()).write(this);
         }
 
         throw new IllegalStateException("Class must have ACLanguage annotation");
@@ -36,8 +40,11 @@ public abstract class Configuratable {
     public void load(String content) {
         if (getClass().isAnnotationPresent(ACLanguage.class)) {
             ACLanguage language = getClass().getAnnotation(ACLanguage.class);
-            ConfigParsersFactory.getInstance().getParser(language.language()).parse(content, this);
+            loadImportant(content, language.language());
         }
     }
 
+    public void loadImportant(String content, ConfigLang lang) {
+        ConfigParsersFactory.INSTANCE.getParser(lang).parse(content, this);
+    }
 }
